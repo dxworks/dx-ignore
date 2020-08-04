@@ -1,4 +1,4 @@
-package com.denisfeier.builder;
+package org.dxworks.builder;
 
 
 import com.denisfeier.globIgnorer.IgnorerBuilder;

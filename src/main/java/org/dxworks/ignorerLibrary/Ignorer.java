@@ -1,4 +1,4 @@
-package com.denisfeier.globIgnorer;
+package org.dxworks.globIgnorer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

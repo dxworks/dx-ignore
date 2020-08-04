@@ -1,7 +1,4 @@
-package com.denisfeier;
-
-import com.denisfeier.globIgnorer.Ignorer;
-import com.denisfeier.globIgnorer.IgnorerBuilder;
+package org.dxworks.globIgnorer;
 
 import java.nio.file.Path;
 
