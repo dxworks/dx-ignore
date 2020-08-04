@@ -1,4 +1,4 @@
-package org.dxworks.globIgnorer;
+package org.dxworks.ignorerLibrary;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package org.dxworks.globIgnorer;
+package org.dxworks.ignorerLibrary;
 
 import java.nio.file.Path;
 

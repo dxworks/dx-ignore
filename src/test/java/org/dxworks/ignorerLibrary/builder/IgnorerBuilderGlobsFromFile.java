@@ -1,7 +1,6 @@
-package org.dxworks.builder;
+package org.dxworks.ignorerLibrary.builder;
 
-
-import com.denisfeier.globIgnorer.IgnorerBuilder;
+import org.dxworks.ignorerLibrary.IgnorerBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
