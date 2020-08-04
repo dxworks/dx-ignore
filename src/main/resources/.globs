@@ -1,0 +1,9 @@
+# black listed
+
+**/*.iml
+**/.idea/**
+**/target/**
+**/src/test/**
+
+# white listed
+! **/.idea/.gitignore
