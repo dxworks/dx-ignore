@@ -18,7 +18,7 @@ public class Ignorer {
         this.whiteMatchersGlobs = whiteMatchersGlobs;
     }
 
-    public boolean accept(String path) {
+    public boolean accepts(String path) {
         boolean whiteGlobs = this.match(this.whiteMatchersGlobs, path);
         boolean blackGlobs = this.match(this.blackMatchersGlobs, path);
 
