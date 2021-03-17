@@ -1,19 +1,19 @@
 package org.dxworks.ignorerLibrary.builder;
 
 import org.dxworks.ignorerLibrary.IgnorerBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IgnorerBuilderGlobsFromFile {
 
-	private IgnorerBuilder builder;
+	private static IgnorerBuilder builder;
 
-	@Before
-	public void setup() {
+	@BeforeAll
+	public static void setup() {
 		List<String> globs = List.of(
 				"**/*.iml",
 				"**/.idea/**",
@@ -21,7 +21,7 @@ public class IgnorerBuilderGlobsFromFile {
 				"**/src/test/**",
 				"!**/.idea/.gitignore");
 
-		this.builder = new IgnorerBuilder(globs);
+		builder = new IgnorerBuilder(globs);
 	}
 
 	@Test

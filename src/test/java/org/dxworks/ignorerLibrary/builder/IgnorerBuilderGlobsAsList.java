@@ -2,25 +2,23 @@ package org.dxworks.ignorerLibrary.builder;
 
 import org.dxworks.ignorerLibrary.Ignorer;
 import org.dxworks.ignorerLibrary.IgnorerBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
+import java.net.URISyntaxException;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.dxworks.ignorerLibrary.TestUtils.getGlobsPath;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 
 public class IgnorerBuilderGlobsAsList {
+	private static IgnorerBuilder builder;
 
-	private IgnorerBuilder builder;
-
-	@Before
-	public void setup() {
-		String rootPath = System.getProperty("user.dir");
-
-		this.builder = new IgnorerBuilder(
-				Path.of(rootPath + "/src/test/resources/.globs"));
+	@BeforeAll
+	public static void setup() throws URISyntaxException {
+		builder = new IgnorerBuilder(getGlobsPath(".globs"));
 	}
 
 	@Test
@@ -36,7 +34,7 @@ public class IgnorerBuilderGlobsAsList {
 
 	@Test
 	public void compileBlobs() {
-		Ignorer ignorer = this.builder.compile();
+		Ignorer ignorer = builder.compile();
 		assertNotEquals(ignorer, null);
 	}
 }
