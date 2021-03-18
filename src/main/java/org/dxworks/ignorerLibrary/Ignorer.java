@@ -19,7 +19,7 @@ public class Ignorer {
 		this.whiteMatchersGlobs = whiteMatchersGlobs;
 	}
 
-	public boolean accept(String path) {
+	public boolean accepts(String path) {
 		boolean whiteGlobs = match(whiteMatchersGlobs, path);
 		boolean blackGlobs = match(blackMatchersGlobs, path);
 
@@ -28,6 +28,10 @@ public class Ignorer {
 		logger.debug("Match Path {} with globs", path);
 
 		return whiteGlobs || !blackGlobs;
+	}
+
+	public boolean accepts(Path path) {
+		return accepts(path.toString());
 	}
 
 	private boolean match(List<PathMatcher> globsMatcher, String path) {

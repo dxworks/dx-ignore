@@ -30,15 +30,12 @@ public class IgnorerBuilder {
 	}
 
 	public Ignorer compile() {
-		this.logger.info("Compile globs");
 		List<PathMatcher> blackMatchersGlobs = this.preCompile(true);
 		List<PathMatcher> whiteMatchersGlobs = this.preCompile(false);
-		this.logger.info("Globs compilation finished successfully");
 		return new Ignorer(blackMatchersGlobs, whiteMatchersGlobs);
 	}
 
 	private List<PathMatcher> preCompile(boolean isNegative) {
-		this.logger.info("Precompile globs");
 		return this.globs
 				.stream()
 				.filter(glob -> {
@@ -58,7 +55,7 @@ public class IgnorerBuilder {
 	}
 
 	private List<String> getGlobs(Path path) {
-		this.logger.debug("Fetch globs from user path: {}", path.toAbsolutePath());
+		this.logger.info("Fetch globs from {}", path.toAbsolutePath());
 		List<String> fileItems = new LinkedList<>();
 		try (BufferedReader br = new BufferedReader(new java.io.FileReader(path.toString()))) {
 			String globItem;
@@ -77,7 +74,7 @@ public class IgnorerBuilder {
 				.filter(line -> !line.startsWith("#"))
 				.collect(Collectors.toList());
 
-		this.logger.debug("Globs list: {}", globs);
+		this.logger.info("Globs list: {}", globs);
 
 		return globs;
 	}

@@ -21,25 +21,25 @@ public class BlacklistedGlobs {
 
 	@Test
 	public void fromDotIdeaNotAccepted() {
-		boolean encodingsXml = ignorer.accept("/.idea/encodings.xml");
+		boolean encodingsXml = ignorer.accepts("/.idea/encodings.xml");
 		assertFalse(encodingsXml);
 	}
 
 	@Test
 	public void imlNotAccepted() {
-		boolean imlFile = ignorer.accept("/ignore-library.iml");
+		boolean imlFile = ignorer.accepts("/ignore-library.iml");
 		assertFalse(imlFile);
 	}
 
 	@Test
 	public void javaFilesAccepted() {
-		boolean javaFile = ignorer.accept("/src/test/java/GlobsReader.java");
+		boolean javaFile = ignorer.accepts("/src/test/java/GlobsReader.java");
 		assertTrue(javaFile);
 	}
 
 	@Test
 	public void acceptGitIgnoreFromDotIdea() {
-		boolean gitignore = ignorer.accept("/.idea/.gitignore");
+		boolean gitignore = ignorer.accepts("/.idea/.gitignore");
 		assertTrue(gitignore);
 	}
 }
