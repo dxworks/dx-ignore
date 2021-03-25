@@ -23,10 +23,6 @@ public class Ignorer {
 		boolean whiteGlobs = match(whiteMatchersGlobs, path);
 		boolean blackGlobs = match(blackMatchersGlobs, path);
 
-		logger.debug("Black Globs res: {}", blackGlobs);
-		logger.debug("White Globs res: {}", whiteGlobs);
-		logger.debug("Match Path {} with globs", path);
-
 		return whiteGlobs || !blackGlobs;
 	}
 
