@@ -1,16 +1,14 @@
 # Ignorer-library
 
-This is a java library that helps you to
-check if a path belongs to a set of restrictions
-in a style like gitignore by using the unix globs pattern.
+This is a java library that helps you to check if a path belongs to a set of restrictions in a style like gitignore by
+using the unix globs pattern.
 
 Visit us on [Github](https://github.com/dxworks/ignorer-library).
 
 ## Unix globs
 
-Globs are a unix feature that helps you to identify
-if a path belongs to a specific pattern similar with regex 
-but much more simple.
+Globs are a unix feature that helps you to identify if a path belongs to a specific pattern similar with regex but much
+more simple.
 
 For some examples of globs patterns, and a brief documentation check:
 
@@ -18,10 +16,10 @@ https://linuxhint.com/bash_globbing_tutorial/
 
 ## Usage
 
-The `IgnorerBuilder` helps you to compile your globs.
-It can be used with a list of String patterns or file:
+The `IgnorerBuilder` helps you to compile your globs. It can be used with a list of String patterns or file:
 
 ### Create Ignorer
+
 ```
     List<String> globs = List.of(
                   "**/*.iml", // ignore all files with '.iml' extension
@@ -36,10 +34,7 @@ It can be used with a list of String patterns or file:
     Ignorer ignorer = builder.compile();
 ```
 
-
-The `accept` method of the `ignorer` object will check if your path belongs
-or not to those restrictions.
-
+The `accept` method of the `ignorer` object will check if your path belongs or not to those restrictions.
 
 ```
     ignorer.accept("{project-path}/src/main/java/com/denisfeier/Main.java"); // true
@@ -48,7 +43,6 @@ or not to those restrictions.
     ignorer.accept("{project-path}/.idea/.gitignore"); // true because of this rule !**/.idea/.gitignore
     ignorer.accept("{project-path}/.idea/.random"); // false
 ```
-
 
 ### Ignorer File Example
 

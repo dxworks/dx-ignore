@@ -2,44 +2,44 @@ package org.dxworks.ignorerLibrary.ignorer;
 
 import org.dxworks.ignorerLibrary.Ignorer;
 import org.dxworks.ignorerLibrary.IgnorerBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
+import java.net.URISyntaxException;
+
+import static org.dxworks.ignorerLibrary.TestUtils.getGlobsPath;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BlacklistedGlobs {
-    private Ignorer ignorer;
-    private final String rootPath = System.getProperty("user.dir");
+	private static Ignorer ignorer;
 
-    @Before
-    public void setup() {
-        IgnorerBuilder builder = new IgnorerBuilder(
-                Path.of(this.rootPath + "/src/test/resources/.globs2"));
-        this.ignorer = builder.compile();
-    }
+	@BeforeAll
+	public static void setup() throws URISyntaxException {
+		ignorer = new IgnorerBuilder(getGlobsPath(".globs2")).compile();
+	}
 
-    @Test
-    public void fromDotIdeaNotAccepted() {
-        boolean encodingsXml = this.ignorer.accepts(this.rootPath + "/.idea/encodings.xml");
-        assertFalse(encodingsXml);
-    }
+	@Test
+	public void fromDotIdeaNotAccepted() {
+		boolean encodingsXml = ignorer.accepts("/.idea/encodings.xml");
+		assertFalse(encodingsXml);
+	}
 
-    @Test
-    public void imlNotAccepted() {
-        boolean imlFile = this.ignorer.accepts(this.rootPath + "/ignore-library.iml");
-        assertFalse(imlFile);
-    }
+	@Test
+	public void imlNotAccepted() {
+		boolean imlFile = ignorer.accepts("/ignore-library.iml");
+		assertFalse(imlFile);
+	}
 
-    @Test
-    public void javaFilesAccepted() {
-        boolean javaFile = this.ignorer.accepts(this.rootPath + "/src/test/java/GlobsReader.java");
-        assertTrue(javaFile);
-    }
+	@Test
+	public void javaFilesAccepted() {
+		boolean javaFile = ignorer.accepts("/src/test/java/GlobsReader.java");
+		assertTrue(javaFile);
+	}
 
-    @Test
-    public void acceptGitIgnoreFromDotIdea() {
-        boolean gitignore = this.ignorer.accepts(this.rootPath + "/.idea/.gitignore");
-        assertTrue(gitignore);
-    }
+	@Test
+	public void acceptGitIgnoreFromDotIdea() {
+		boolean gitignore = ignorer.accepts("/.idea/.gitignore");
+		assertTrue(gitignore);
+	}
 }
