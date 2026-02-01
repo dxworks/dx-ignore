@@ -1,6 +1,6 @@
-package org.dxworks.ignorerLibrary.builder;
+package org.dxworks.utils.ignorer.builder;
 
-import org.dxworks.ignorerLibrary.IgnorerBuilder;
+import org.dxworks.utils.ignorer.IgnorerBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class IgnorerBuilderGlobsFromFile {
+public class IgnorerBuilderGlobsFromFileTest {
 
 	private static IgnorerBuilder builder;
 

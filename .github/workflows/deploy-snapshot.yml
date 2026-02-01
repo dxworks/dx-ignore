@@ -1,9 +1,9 @@
-name: Deploy Release
+name: Deploy Snapshot
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -21,9 +21,7 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Set version from tag
-        run: ./mvnw versions:set -DnewVersion=${GITHUB_REF#refs/tags/v}
-      - name: Publish release
+      - name: Publish snapshot
         run: ./mvnw deploy -Prelease
         env:
           MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}

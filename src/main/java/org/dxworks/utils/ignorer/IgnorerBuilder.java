@@ -1,7 +1,4 @@
-package org.dxworks.ignorerLibrary;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package org.dxworks.utils.ignorer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,22 +10,61 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.dxworks.utils.ignorer.Ignorer.log;
+
+/**
+ * Builder for creating {@link Ignorer} instances from glob patterns.
+ *
+ * <p>Patterns can be provided as a list of strings or read from a file.
+ * Patterns starting with {@code !} are whitelist patterns (exclusions).
+ * Lines starting with {@code #} in files are treated as comments.
+ *
+ * <p>Example:
+ * <pre>{@code
+ * // From a list
+ * Ignorer ignorer = new IgnorerBuilder(List.of("**&#47;*.log", "!**&#47;important.log")).compile();
+ *
+ * // From a file
+ * Ignorer ignorer = new IgnorerBuilder(Path.of(".gitignore")).compile();
+ * }</pre>
+ */
 public class IgnorerBuilder {
 
 	private final List<String> globs;
 
 	private final FileSystem fileSystem = FileSystems.getDefault();
 
-	private final Logger logger = LoggerFactory.getLogger(IgnorerBuilder.class);
-
+	/**
+	 * Creates a builder with the specified glob patterns.
+	 *
+	 * @param globs list of glob patterns; patterns starting with {@code !} are whitelist patterns
+	 */
 	public IgnorerBuilder(List<String> globs) {
 		this.globs = globs;
 	}
 
+	/**
+	 * Creates a builder by reading glob patterns from a file.
+	 *
+	 * <p>The file format supports:
+	 * <ul>
+	 *   <li>One pattern per line</li>
+	 *   <li>Lines starting with {@code #} are comments</li>
+	 *   <li>Empty lines are ignored</li>
+	 *   <li>Patterns starting with {@code !} are whitelist patterns</li>
+	 * </ul>
+	 *
+	 * @param path path to the file containing glob patterns
+	 */
 	public IgnorerBuilder(Path path) {
 		this.globs = this.getGlobs(path);
 	}
 
+	/**
+	 * Compiles the glob patterns into an {@link Ignorer}.
+	 *
+	 * @return a new Ignorer instance
+	 */
 	public Ignorer compile() {
 		List<PathMatcher> blackMatchersGlobs = this.preCompile(true);
 		List<PathMatcher> whiteMatchersGlobs = this.preCompile(false);
@@ -55,7 +91,7 @@ public class IgnorerBuilder {
 	}
 
 	private List<String> getGlobs(Path path) {
-		this.logger.info("Fetch globs from {}", path.toAbsolutePath());
+		log("Fetch globs from " + path.toAbsolutePath());
 		List<String> fileItems = new LinkedList<>();
 		try (BufferedReader br = new BufferedReader(new java.io.FileReader(path.toString()))) {
 			String globItem;
@@ -63,7 +99,7 @@ public class IgnorerBuilder {
 				fileItems.add(globItem);
 			}
 		} catch (IOException e) {
-			this.logger.error(e.getMessage());
+			log("Error reading globs file: " + e.getMessage());
 		}
 
 		List<String> globs = fileItems
@@ -74,11 +110,16 @@ public class IgnorerBuilder {
 				.filter(line -> !line.startsWith("#"))
 				.collect(Collectors.toList());
 
-		this.logger.info("Globs list: {}", globs);
+		log("Globs list: " + globs);
 
 		return globs;
 	}
 
+	/**
+	 * Returns the list of glob patterns.
+	 *
+	 * @return the glob patterns
+	 */
 	public List<String> getGlobs() {
 		return globs;
 	}

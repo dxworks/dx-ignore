@@ -1,17 +1,17 @@
-package org.dxworks.ignorerLibrary.ignorer;
+package org.dxworks.utils.ignorer.ignorer;
 
-import org.dxworks.ignorerLibrary.Ignorer;
-import org.dxworks.ignorerLibrary.IgnorerBuilder;
+import org.dxworks.utils.ignorer.Ignorer;
+import org.dxworks.utils.ignorer.IgnorerBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
 
-import static org.dxworks.ignorerLibrary.TestUtils.getGlobsPath;
+import static org.dxworks.utils.ignorer.TestUtils.getGlobsPath;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BlacklistedGlobs {
+public class BlacklistedGlobsTest {
 	private static Ignorer ignorer;
 
 	@BeforeAll

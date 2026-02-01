@@ -1,19 +1,19 @@
-package org.dxworks.ignorerLibrary.builder;
+package org.dxworks.utils.ignorer.builder;
 
-import org.dxworks.ignorerLibrary.Ignorer;
-import org.dxworks.ignorerLibrary.IgnorerBuilder;
+import org.dxworks.utils.ignorer.Ignorer;
+import org.dxworks.utils.ignorer.IgnorerBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static org.dxworks.ignorerLibrary.TestUtils.getGlobsPath;
+import static org.dxworks.utils.ignorer.TestUtils.getGlobsPath;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
-public class IgnorerBuilderGlobsAsList {
+public class IgnorerBuilderGlobsAsListTest {
 	private static IgnorerBuilder builder;
 
 	@BeforeAll
@@ -35,6 +35,6 @@ public class IgnorerBuilderGlobsAsList {
 	@Test
 	public void compileBlobs() {
 		Ignorer ignorer = builder.compile();
-		assertNotEquals(ignorer, null);
+		assertNotNull(ignorer);
 	}
 }
